@@ -22,16 +22,12 @@ public class UserController {
     @PostMapping
     public User postUser(@RequestBody User user) {
 
-        if (user.getEmail().isEmpty()) {
+        if (user.getEmail() == null && user.getEmail().isBlank()) {
             throw new InvalidEmailException("Email can't be empty. Please fill it up!");
         }
 
-        if (users.stream()
-                .map(User::getEmail)
-                .toList().contains(user.getEmail())) {
-
+        if (users.contains(user)) {
             throw new UserAlreadyExistException("This email is occupied by another user!");
-
         }
 
         users.add(user);
@@ -41,10 +37,11 @@ public class UserController {
     @PutMapping
     public User putUser(@RequestBody User user) {
 
-        if (user.getEmail().isEmpty()) {
+        if (user.getEmail() == null && user.getEmail().isBlank()) {
             throw new InvalidEmailException("Email can't be empty. Please fill it up!");
         }
 
+        users.remove(user);
         users.add(user);
 
         return user;

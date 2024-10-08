@@ -1,12 +1,12 @@
 package org.mirasruntime.catsgramtask1miras.controller;
 
 import org.mirasruntime.catsgramtask1miras.exceptions.InvalidEmailException;
+import org.mirasruntime.catsgramtask1miras.exceptions.NotFoundException;
 import org.mirasruntime.catsgramtask1miras.exceptions.UserAlreadyExistException;
 import org.mirasruntime.catsgramtask1miras.model.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -45,5 +45,13 @@ public class UserController {
         users.add(user);
 
         return user;
+    }
+
+    @GetMapping("/user/{userMail}")
+    public User getUser(@PathVariable("userMail") String userMail) {
+        return users.stream()
+                .filter(post1 -> post1.getEmail().equals(userMail))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("User with email " + userMail + " not found."));
     }
 }

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.MirasRuntime</groupId>
-    <artifactId>SpringBootCatsGramTask1Miras</artifactId>
+    <artifactId>CatsGramMiras</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>CatsGramTask1Miras</name>
-    <description>CatsGramTask1Miras</description>
+    <name>CatsGramMiras</name>
+    <description>CatsGramMiras</description>
     <url/>
     <licenses>
         <license/>

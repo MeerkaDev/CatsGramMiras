@@ -3,7 +3,7 @@ package org.mirasruntime.catsgramtask1miras.model;
 import java.time.Instant;
 
 public class Post {
-    private final int id;
+    private final Integer id;
     private final String author; // автор
     private final Instant creationDate = Instant.now(); // дата создания
     private String description; // описание
@@ -39,7 +39,7 @@ public class Post {
         this.photoUrl = photoUrl;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 }

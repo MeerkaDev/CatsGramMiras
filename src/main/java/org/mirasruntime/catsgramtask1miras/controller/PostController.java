@@ -1,31 +1,27 @@
 package org.mirasruntime.catsgramtask1miras.controller;
 
-import org.mirasruntime.catsgramtask1miras.exceptions.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.mirasruntime.catsgramtask1miras.model.Post;
+import org.mirasruntime.catsgramtask1miras.service.PostService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-@RestController
-public class PostController {
-    private List<Post> posts = new ArrayList<>();
 
+@RestController
+@RequiredArgsConstructor
+public class PostController {
+    private final PostService postService;
     @GetMapping("/posts")
     public List<Post> findAll() {
-        return posts;
+        return postService.findAll();
     }
-
     @PostMapping(value = "/post")
     public Post create(@RequestBody Post post) {
-        posts.add(post);
-        return post;
+        return postService.create(post);
     }
 
     @GetMapping("/post/{postId}")
     public Post findPost(@PathVariable("postId") Integer postId) {
-        return posts.stream()
-                .filter(post1 -> post1.getId() == postId)
-                .findFirst()
-                .orElseThrow(() -> new NotFoundException("Post " + postId + " not found."));
+        return postService.findPostById(postId);
     }
 }

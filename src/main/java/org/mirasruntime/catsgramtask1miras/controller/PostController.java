@@ -10,11 +10,17 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class PostController {
+
     private final PostService postService;
+
     @GetMapping("/posts")
-    public List<Post> findAll() {
-        return postService.findAll();
+    public List<Post> findAll(String sort, int size, int page) {
+
+        int from = (page - 1) * size;
+
+        return postService.findAll(sort, from, size);
     }
+
     @PostMapping(value = "/post")
     public Post create(@RequestBody Post post) {
         return postService.create(post);
